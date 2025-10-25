@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mera Saathi - Your Journey to Freedom</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* CSS from the original file is removed here and placed in the CSS section below */
+        body {
+            box-sizing: border-box;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .card-shadow {
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        .progress-ring {
+            transform: rotate(-90deg);
+        }
+        .celebration {
+            animation: celebrate 0.6s ease-in-out;
+        }
+        @keyframes celebrate {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+    </style>
+</head>
+<body class="min-h-full bg-gray-50">
+    <div class="min-h-full">
+        <header class="gradient-bg text-white">
+            <div class="max-w-4xl mx-auto px-4 py-6">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center">
+                            <span class="text-2xl">🌟</span>
+                        </div>
+                        <h1 class="text-2xl font-bold">Mera Saathi</h1>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-sm opacity-90">Clean for</p>
+                        <p class="text-xl font-bold" id="cleanDays">0 days</p>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="max-w-4xl mx-auto px-4 py-6 space-y-6">
+            <div id="userSetup" class="bg-white rounded-xl p-6 card-shadow hidden">
+                <h2 class="text-xl font-semibold mb-4 text-gray-800 flex items-center">
+                    <span class="mr-2">🎯</span>
+                    Setup Your Recovery Plan
+                </h2>
+                <div class="bg-blue-50 p-4 rounded-lg mb-6">
+                    <p class="text-blue-800 text-sm mb-2">
+                        <strong>Welcome to your recovery journey!</strong> Please share your current usage so we can create a personalized 90-day plan to help you become completely free.
+                    </p>
+                    <p class="text-blue-700 text-xs">All data is stored securely on your device only.</p>
+                </div>
+
+                <form onsubmit="saveUserData(event)" class="space-y-6">
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="space-y-4">
+                            <h3 class="font-medium text-gray-800">Personal Information</h3>
+                            <div>
+                                <label for="userName" class="block text-sm font-medium text-gray-700 mb-1">Your Name</label>
+                                <input type="text" id="userName" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" placeholder="Enter your name" required>
+                            </div>
+                            <div>
+                                <label for="userAge" class="block text-sm font-medium text-gray-700 mb-1">Age</label>
+                                <input type="number" id="userAge" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" placeholder="Your age" min="13" max="100" required>
+                            </div>
+                            <div>
+                                <label for="addictionDuration" class="block text-sm font-medium text-gray-700 mb-1">How long have you been using? (years)</label>
+                                <input type="number" id="addictionDuration" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" placeholder="Years of usage" min="0" step="0.5" required>
+                            </div>
+                        </div>
+
+                        <div class="space-y-4">
+                            <h3 class="font-medium text-gray-800">Current Daily Usage</h3>
+                            <div>
+                                <label for="currentCigarettes" class="block text-sm font-medium text-gray-700 mb-1">🚬 Cigarettes per day</label>
+                                <input type="number" id="currentCigarettes" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" placeholder="0" min="0">
+                            </div>
+                            <div>
+                                <label for="currentGuthka" class="block text-sm font-medium text-gray-700 mb-1">🟤 Guthka packets per day</label>
+                                <input type="number" id="currentGuthka" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" placeholder="0" min="0">
+                            </div>
+                            <div>
+                                <label for="currentAlcohol" class="block text-sm font-medium text-gray-700 mb-1">🍺 Alcohol drinks per week</label>
+                                <input type="number" id="currentAlcohol" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" placeholder="0" min="0">
+                            </div>
+                            <div>
+                                <label for="currentCannabis" class="block text-sm font-medium text-gray-700 mb-1">🌿 Cannabis uses per day</label>
+                                <input type="number" id="currentCannabis" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" placeholder="0" min="0">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4">
+                        <h3 class="font-medium text-gray-800">Your Motivation</h3>
+                        <div>
+                            <label for="quitReason" class="block text-sm font-medium text-gray-700 mb-1">Why do you want to quit?</label>
+                            <select id="quitReason" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" required>
+                                <option value="">Select your main reason</option>
+                                <option value="health">Health concerns</option>
+                                <option value="family">For my family</option>
+                                <option value="money">Save money</option>
+                                <option value="career">Career/professional reasons</option>
+                                <option value="self-respect">Self-respect and confidence</option>
+                                <option value="spiritual">Spiritual/religious reasons</option>
+                                <option value="other">Other personal reasons</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="previousAttempts" class="block text-sm font-medium text-gray-700 mb-1">Have you tried quitting before?</label>
+                            <select id="previousAttempts" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" required>
+                                <option value="">Select option</option>
+                                <option value="never">This is my first attempt</option>
+                                <option value="once">Yes, once before</option>
+                                <option value="few">Yes, a few times</option>
+                                <option value="many">Yes, many times</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-center">
+                        <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white px-8 py-3 rounded-lg font-medium text-lg transition-colors">
+                            🚀 Create My 90-Day Recovery Plan
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <div id="recoverySchedule" class="bg-white rounded-xl p-6 card-shadow hidden">
+                <h2 class="text-xl font-semibold mb-4 text-gray-800 flex items-center">
+                    <span class="mr-2">📅</span>
+                    Your Personalized 90-Day Recovery Schedule
+                </h2>
+
+                <div id="userSummary" class="bg-gradient-to-r from-blue-50 to-purple-50 p-4 rounded-lg mb-6">
+                    </div>
+
+                <div class="flex space-x-2 mb-6">
+                    <button onclick="showPhase(1)" id="phase1Btn" class="px-4 py-2 bg-blue-500 text-white rounded-lg text-sm font-medium">
+                        Phase 1 (Days 1-30)
+                    </button>
+                    <button onclick="showPhase(2)" id="phase2Btn" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg text-sm font-medium">
+                        Phase 2 (Days 31-60)
+                    </button>
+                    <button onclick="showPhase(3)" id="phase3Btn" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg text-sm font-medium">
+                        Phase 3 (Days 61-90)
+                    </button>
+                </div>
+
+                <div id="phaseContent">
+                    </div>
+
+                <div class="mt-6 p-4 bg-green-50 rounded-lg">
+                    <h4 class="font-medium text-green-800 mb-2">Today's Schedule</h4>
+                    <div id="todaySchedule" class="space-y-2">
+                        </div>
+                </div>
+
+                <div class="mt-6 text-center">
+                    <button onclick="resetUserData()" class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg text-sm">
+                        🔄 Reset & Create New Plan
+                    </button>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl p-6 card-shadow">
+                <h2 class="text-xl font-semibold mb-4 text-gray-800">Today's Intake Progress</h2>
+
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="md:col-span-2">
+                        <div class="mb-4 p-3 bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg text-center">
+                            <div class="text-xl font-bold text-blue-600" id="progressPercent">0</div>
+                            <div class="text-xs text-gray-600">Total Intake Today</div>
+                            <div class="text-xs text-gray-500 mt-1" id="progressText">No intake logged today</div>
+                        </div>
+
+                        <div class="space-y-2">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-2 w-20">
+                                    <span class="text-sm">🚬</span>
+                                    <span class="text-xs font-medium">Cigarettes</span>
+                                </div>
+                                <div class="flex items-center space-x-2 flex-1 mx-3">
+                                    <div class="bg-gray-200 rounded-full h-2 flex-1">
+                                        <div id="cigarettesBar" class="bg-red-500 h-2 rounded-full transition-all duration-500" style="width: 0%"></div>
+                                    </div>
+                                    <span class="text-xs font-bold w-6 text-red-600" id="cigarettesCount">0</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-2 w-20">
+                                    <span class="text-sm">🟤</span>
+                                    <span class="text-xs font-medium">Guthka</span>
+                                </div>
+                                <div class="flex items-center space-x-2 flex-1 mx-3">
+                                    <div class="bg-gray-200 rounded-full h-2 flex-1">
+                                        <div id="guthkaBar" class="bg-amber-600 h-2 rounded-full transition-all duration-500" style="width: 0%"></div>
+                                    </div>
+                                    <span class="text-xs font-bold w-6 text-amber-600" id="guthkaCount">0</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-2 w-20">
+                                    <span class="text-sm">🍺</span>
+                                    <span class="text-xs font-medium">Alcohol</span>
+                                </div>
+                                <div class="flex items-center space-x-2 flex-1 mx-3">
+                                    <div class="bg-gray-200 rounded-full h-2 flex-1">
+                                        <div id="alcoholBar" class="bg-blue-600 h-2 rounded-full transition-all duration-500" style="width: 0%"></div>
+                                    </div>
+                                    <span class="text-xs font-bold w-6 text-blue-600" id="alcoholCount">0</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-2 w-20">
+                                    <span class="text-sm">🌿</span>
+                                    <span class="text-xs font-medium">Cannabis</span>
+                                </div>
+                                <div class="flex items-center space-x-2 flex-1 mx-3">
+                                    <div class="bg-gray-200 rounded-full h-2 flex-1">
+                                        <div id="cannabisBar" class="bg-green-600 h-2 rounded-full transition-all duration-500" style="width: 0%"></div>
+                                    </div>
+                                    <span class="text-xs font-bold w-6 text-green-600" id="cannabisCount">0</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col items-center justify-center">
+                        <div class="relative w-24 h-24 mb-3">
+                            <svg class="w-24 h-24 progress-ring">
+                                <circle cx="48" cy="48" r="40" stroke="#e5e7eb" stroke-width="6" fill="none"/>
+                                <circle id="cigarettesCircle" cx="48" cy="48" r="40" stroke="#ef4444" stroke-width="1.5"
+                                        fill="none" stroke-dasharray="251.33" stroke-dashoffset="251.33"
+                                        style="transition: stroke-dashoffset 0.5s ease-in-out"/>
+                                <circle id="guthkaCircle" cx="48" cy="48" r="37" stroke="#d97706" stroke-width="1.5"
+                                        fill="none" stroke-dasharray="232.48" stroke-dashoffset="232.48"
+                                        style="transition: stroke-dashoffset 0.5s ease-in-out"/>
+                                <circle id="alcoholCircle" cx="48" cy="48" r="34" stroke="#2563eb" stroke-width="1.5"
+                                        fill="none" stroke-dasharray="213.63" stroke-dashoffset="213.63"
+                                        style="transition: stroke-dashoffset 0.5s ease-in-out"/>
+                                <circle id="cannabisCircle" cx="48" cy="48" r="31" stroke="#16a34a" stroke-width="1.5"
+                                        fill="none" stroke-dasharray="194.78" stroke-dashoffset="194.78"
+                                        style="transition: stroke-dashoffset 0.5s ease-in-out"/>
+                            </svg>
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <span id="circlePercent" class="text-lg font-bold text-gray-800">0</span>
+                            </div>
+                        </div>
+                        <p class="text-xs text-gray-600 text-center">Progress Rings</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3 mt-6">
+                    <button onclick="quickIntake('cigarettes')" class="p-3 bg-red-500 hover:bg-red-600 text-white rounded-lg border-2 border-red-600 transition-colors shadow-lg">
+                        <div class="text-xl mb-1">🚬</div>
+                        <div class="text-xs font-bold">Cigarette</div>
+                    </button>
+                    <button onclick="quickIntake('guthka')" class="p-3 bg-amber-600 hover:bg-amber-700 text-white rounded-lg border-2 border-amber-700 transition-colors shadow-lg">
+                        <div class="text-xl mb-1">🟤</div>
+                        <div class="text-xs font-bold">Guthka</div>
+                    </button>
+                    <button onclick="quickIntake('alcohol')" class="p-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg border-2 border-blue-700 transition-colors shadow-lg">
+                        <div class="text-xl mb-1">🍺</div>
+                        <div class="text-xs font-bold">Alcohol</div>
+                    </button>
+                    <button onclick="quickIntake('cannabis')" class="p-3 bg-green-600 hover:bg-green-700 text-white rounded-lg border-2 border-green-700 transition-colors shadow-lg">
+                        <div class="text-xl mb-1">🌿</div>
+                        <div class="text-xs font-bold">Cannabis</div>
+                    </button>
+                </div>
+
+                <div class="mt-4 p-4 bg-blue-50 rounded-lg">
+                    <h4 class="font-medium text-blue-800 mb-2">Set Daily Target</h4>
+                    <div class="flex items-center space-x-2">
+                        <select id="targetType" class="flex-1 p-2 border border-blue-300 rounded text-sm">
+                            <option value="">Choose substance</option>
+                            <option value="cigarettes">🚬 Cigarettes</option>
+                            <option value="guthka">🟤 Guthka</option>
+                            <option value="alcohol">🍺 Alcohol</option>
+                            <option value="cannabis">🌿 Cannabis</option>
+                        </select>
+                        <input type="number" id="targetAmount" placeholder="Target" class="w-20 p-2 border border-blue-300 rounded text-sm">
+                        <button onclick="setDailyTarget()" class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-2 rounded text-sm">
+                            Set
+                        </button>
+                    </div>
+                    <div id="currentTarget" class="text-xs text-gray-700 mt-2">
+                        </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="joshi.js"></script>
+</body>
+</html>
